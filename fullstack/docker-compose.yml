@@ -1,0 +1,19 @@
+services:
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:3000"
+    volumes:
+      - ./backend:/app     #Local folder synced with container
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app    #Local folder synced with container
+      - /app/node_modules
+    depends_on:
+      - backend
