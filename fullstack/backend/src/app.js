@@ -1,12 +1,15 @@
 import express from 'express'
 import morgan from 'morgan'
+const app = express()
 app.use(morgan('dev'))
 import cors from 'cors'
-const app = express()
+
 app.use(cors({
   origin: 'http://localhost:5173'
 
 }))
+
+app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -21,5 +24,9 @@ app.get('/api/users', (req, res) => {
   ]
   res.json({ users })
 })
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
+
 
 export default app
